@@ -1,0 +1,10 @@
+federation_version: =2.7.1
+subgraphs:
+  foo:
+    routing_url: http://subgraph-simulator:8081/foo/graphql
+    schema:
+      file: foo.graphql
+  bar:
+    routing_url: http://subgraph-simulator:8081/bar/graphql
+    schema:
+      file: bar.graphql

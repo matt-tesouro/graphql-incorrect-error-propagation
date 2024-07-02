@@ -1,0 +1,30 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/foo/graphql"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type":"application/json; charset=utf-8"
+        },
+        "body": "{\"errors\":[{\"message\":\"UUID cannot parse the given literal of type `StringValueNode`.\",\"path\":[\"input\",\"acceptorId\"],\"extensions\":{\"field\":\"Foo.acceptorId\",\"fieldType\":\"UUID\"}}]}"
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/bar/graphql"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type":"application/graphql-response+json; charset=utf-8"
+        },
+        "body": "{\"errors\":[{\"message\":\"UUID cannot parse the given literal of type `StringValueNode`.\",\"path\":[\"input\",\"acceptorId\"],\"extensions\":{\"field\":\"Foo.acceptorId\",\"fieldType\":\"UUID\"}}]}"
+      }
+    }
+  ]
+}

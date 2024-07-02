@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+
+  graphql-router:
+    image: ghcr.io/apollographql/router:v1.39.0
+    ports:
+      - "8080:80"
+      - "8088:8088"
+    volumes:
+      - "./router.yml:/dist/config/router.yaml"
+      - "./supergraph.graphql:/dist/schema/supergraph.graphql"
+    command: ["-c", "config/router.yaml", "-s", "schema/supergraph.graphql"]
+    depends_on:
+      subgraph-simulator:
+        condition: service_healthy
+
+  subgraph-simulator:
+    image: wiremock/wiremock:latest
+    environment:
+      WIREMOCK_OPTIONS: "--port 8081 --verbose"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://subgraph-simulator:8081/health"]
+      interval: 2s
+      timeout: 30s
+      retries: 5
+    ports:
+      - "8081:8081"
+    volumes:
+      - "./wiremock/mappings:/home/wiremock/mappings"

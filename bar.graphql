@@ -1,0 +1,13 @@
+schema {
+    query: Query,
+}
+
+type Query {
+    bar: Bar
+}
+
+type Bar @key(fields: "id") {
+    id: ID!
+    name: String
+    description: String
+}
